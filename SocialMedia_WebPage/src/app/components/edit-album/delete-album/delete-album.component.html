@@ -1,0 +1,57 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Are you ABSOLUTELY sure?</h5>
+    <button type="button" class="close" (click)="cerrarModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="alert alert-warning" role="alert">
+      Unexpected bad things will happen if you don’t read this! 
+    </div>
+
+    <p>
+      This action CANNOT be undone. This will permanently delete the {{ album.name }} album and remove all associated photos.
+    </p>
+    <p>
+      Please type in the name of the album to confirm.
+    </p>
+
+    <div *ngIf="!error && !success">
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput"
+             [(ngModel)]="name" name="name">
+    </div>
+
+    <div class="alert alert-success" role="alert" *ngIf="success">
+      <strong>Album deleted!</strong>
+      <p>
+        Continue to view other albums!
+      </p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+      <strong>Album failed</strong>
+      <p>
+        Sorry, something went wrong. Please try later.
+      </p>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+
+    <button  *ngIf="!error && !success" [disabled]="name != album.name"
+             type="button" class="btn btn-outline-danger col-md-12"
+             (click)="deleteAlbum()">
+            I understand the consequences, delete this album
+    </button>
+
+    <button *ngIf="success"
+             (click)="toAlbums()"
+            type="button" class="btn btn-outline-success">
+            <i fa [name]="'chevron-right'"></i> Continue
+    </button>
+
+  </div>
+</div>

@@ -1,0 +1,161 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Sing up</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <form class="form-horizontal form-singup" [formGroup]="form" *ngIf="!success">
+      <fieldset>
+
+        <!-- Text input-->
+<!-- [ngClass]="{ 'has-danger': !form.controls['name'].valid}" -->
+        <div class="form-group row"
+            [ngClass]="{' has-danger': (!form.get('name').valid && form.get('name').touched)}">
+          <label class="col-md-3 control-label">Name</label>
+          <div class="col-md-9 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i fa [name]="'user-o'"></i>
+              </span>
+              <input  name="name" formControlName="name"
+                      placeholder="Name" class="form-control"  type="text">
+            </div>
+            <div *ngIf="form.get('name').errors?.required && form.get('name').touched"
+                  class="form-control-feedback">
+              Name is required
+            </div>
+          </div>
+        </div>
+
+        <!-- Text input-->
+
+        <div class="form-group row"
+            [ngClass]="{' has-danger': (!form.get('username').valid && form.get('username').touched)}">
+          <label class="col-md-3 control-label">Username</label>
+          <div class="col-md-9 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i fa [name]="'user'"></i>
+              </span>
+              <input  name="username" formControlName="username"
+                      placeholder="Username" class="form-control"  type="text">
+            </div>
+            <div *ngIf="form.get('username').errors?.required && form.get('username').touched"
+                  class="form-control-feedback">
+              Username is required
+            </div>
+            <div *ngIf="form.get('username').errors?.minlength && form.get('username').touched"
+                 class="form-control-feedback">
+              At least {{ form.get('username').errors?.minlength.requiredLength }} characters
+            </div>
+          </div>
+        </div>
+
+        <!-- Text input-->
+
+        <div class="form-group row"
+              [ngClass]="{' has-danger': (!form.get('password').valid && form.get('password').touched)}">
+          <label class="col-md-3 control-label">Password</label>
+          <div class="col-md-9 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i fa [name]="'key'"></i>
+              </span>
+              <input name="password" formControlName="password"
+                     placeholder="Password" class="form-control"  type="password">
+            </div>
+            <div *ngIf="form.get('password').errors?.required && form.get('password').touched"
+                  class="form-control-feedback">
+              Password is required
+            </div>
+            <div *ngIf="form.get('password').errors?.pattern && form.get('password').touched"
+                  class="form-control-feedback">
+              Must contain at least 8 chars, one digit, one lower alpha char and one upper alpha char
+            </div>
+          </div>
+        </div>
+
+        <!-- Text input-->
+
+        <div class="form-group row"
+             [ngClass]="{' has-danger': (!form.get('password2').valid && form.get('password2').touched)}">
+          <label class="col-md-3 control-label">Confirm Password</label>
+          <div class="col-md-9 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i fa [name]="'key'"></i>
+              </span>
+              <input name="password2" formControlName="password2"
+                     placeholder="Confirm Password" class="form-control"  type="password">
+            </div>
+            <div *ngIf="form.get('password2').errors?.nosame && form.get('password2').touched"
+                  class="form-control-feedback">
+              Passwords do not match
+            </div>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group row"
+             [ngClass]="{' has-danger': (!form.get('email').valid && form.get('email').touched)}">
+          <label class="col-md-3 control-label">Email</label>
+          <div class="col-md-9 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i fa [name]="'envelope'"></i>
+              </span>
+              <input name="email" formControlName="email"
+                     placeholder="E-Mail Address" class="form-control"  type="text">
+            </div>
+            <div *ngIf="form.get('email').errors?.required && form.get('email').touched"
+                  class="form-control-feedback">
+              Email is required
+            </div>
+            <div *ngIf="form.get('email').errors?.pattern && form.get('email').touched"
+                  class="form-control-feedback">
+              Enter a valid email
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 control-label">Profile photo</label>
+          <div class="col-md-2">
+            <img *ngIf="fileAvatar.length > 0" [src]="fileAvatar[0].file | filePreview"
+                 class="img-fluid pull-xs-left rounded-circle form-singup-avatar" alt="...">
+            <img *ngIf="fileAvatar.length == 0" src="assets/img/profile.png"
+                  class="img-fluid pull-xs-left rounded-circle form-singup-avatar" alt="...">
+          </div>
+          <div class="col-md-7">
+            <label class="btn btn-sm btn-primary btn-responsive col-md-8" style="margin-top: 8px;">
+              <i fa [name]="'folder-open'"></i> Browse
+              <input type="file" accept="image/*" hidden NgInputFile [isMultiple]=false [files]="fileAvatar">
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="alert alert-success" role="alert" *ngIf="success">
+      Successful created new user {{form.value.username}}
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+      {{ msg }}
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="closeModal()">
+      <i fa [name]="'times-circle'"></i> Close
+    </button>
+    <button type="button" class="btn btn-outline-success" *ngIf="!success" (click)="save()" [disabled]="!form.valid">
+      <i fa [name]="'paper-plane'"></i> Sign up
+    </button>
+  </div>
+</div>

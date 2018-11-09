@@ -1,0 +1,27 @@
+
+.btn-edit{
+  /*margin: 20px auto 20px 20px;*/
+  margin-top: 25px;
+}
+
+.btn-edit-min{
+  left: 80%;
+  border-radius: 50%
+}
+
+.image-div {
+  position: relative;
+}
+.btn-abs {
+  position: absolute;
+  /*left: 80%;*/
+  top: 2%;
+  /*margin: 5px;*/
+}
+
+
+.btn-abs-del {
+  position: absolute;
+  /*left: 80%;*/
+  top: 11%;
+}

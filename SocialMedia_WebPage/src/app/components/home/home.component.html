@@ -1,0 +1,10 @@
+<div class="jumbotron jumbotron-fluid" *ngIf="!_singServ.isAuthenticated()">
+  <div class="container">
+    <h1 class="display-3">PhotoApp</h1>
+    <p class="lead">App for Web Security course - UN Medellin</p>
+  </div>
+</div>
+
+
+
+<login-home *ngIf="_singServ.isAuthenticated()"></login-home>

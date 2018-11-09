@@ -1,0 +1,212 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+  /*height: 100%;*/
+}
+body {
+  /*height: 100%;*/
+}
+
+.main-body{
+  background: -webkit-linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); /* Safari 5.1-6.0 */
+  background: -o-linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); /* Opera 11.1-12.0 */
+  background: -moz-linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); /* Firefox 3.6-15 */
+  background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); /* Standard syntax */
+
+}
+
+.main-container{
+  width: 60%;
+  margin-top: 80px;
+}
+
+.main-container h1 {
+    text-align: center;
+    margin-top: 70px;
+    font-family: 'Droid Sans', sans-serif;
+    font-weight: bold;
+    color: #58595a;
+}
+
+.tz-gallery {
+    padding: 40px;
+}
+
+.tz-gallery .thumbnail {
+    padding: 0;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+    transition: 0.15s ease-in-out;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+}
+
+.tz-gallery .thumbnail:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+.tz-gallery img {
+    border-radius: 4px 4px 0 0;
+}
+
+.tz-gallery .caption{
+    padding: 26px 30px;
+    text-align: center;
+}
+
+.tz-gallery .caption h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.tz-gallery .caption p {
+    font-size: 12px;
+    color: #7b7d7d;
+    margin: 0;
+}
+
+.baguetteBox-button {
+    background-color: transparent !important;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.fsm {
+  font-size: 12px;
+}
+
+.l-25{
+  margin-left: 25px;
+}
+
+.btn-radius{
+  border-radius: 50%;
+}
+
+.card{
+  overflow: hidden;
+}
+
+.card-text{
+  word-wrap: break-word;
+}
+
+/* Drop Zone */
+.drop-zone {
+	border: dotted 3px lightgray;
+	/*opacity: 0.5;*/
+	color: #666;
+	text-align: center;
+  min-height: 40px;
+}
+
+.file-over {
+	border: dotted 3px dodgerblue;
+}
+.file-uploading{
+  opacity: 0.5;
+}
+
+.table {
+	margin-top: 30px;
+}
+
+.text-green {
+	color: green
+}
+
+.drop-preview{
+  margin: 20px;
+}
+
+.drop-preview-remove{
+  width: 30px;
+  height: 30px;
+}
+
+.drop-card{
+  margin-bottom: 20px;
+}
+
+/*Previe Component*/
+.w120{
+  width: 230px;
+}
+
+
+.div-pic-container{
+  margin-bottom: 150px;
+}
+
+.div-pic-1{
+  width: 100%;
+  height: 300px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.pic-titulo{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.div-pic-2{
+  width: 100%;
+  height: 200px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.pic-photo-titulo{
+  font-size: 10px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  align-self: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+
+/* Animations */
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}

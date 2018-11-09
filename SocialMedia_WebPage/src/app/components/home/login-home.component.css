@@ -1,0 +1,7 @@
+.album-title{
+  cursor: pointer;
+}
+
+.album-title:hover{
+  opacity: 0.5;
+}

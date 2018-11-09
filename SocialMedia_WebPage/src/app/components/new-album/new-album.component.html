@@ -1,0 +1,62 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">New Album</h5>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="saveAlbum()" #forma="ngForm" *ngIf="!error && !success">
+
+      <div class="form-group">
+        <label>Name</label>
+        <input  [(ngModel)]="album.name"
+                class="form-control"
+                type="text" name="name"
+                placeholder="Album name"
+                required>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <input  [(ngModel)]="album.description"
+                class="form-control"
+                type="text" name="description"
+                placeholder="Album description"
+                required>
+      </div>
+
+    </form>
+
+    <div class="alert alert-success" role="alert" *ngIf="success">
+      <strong>Album crated!</strong>
+      <p>
+        Continue to upload photos!
+      </p>
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+      <strong>Album failed</strong>
+      <p>
+        Sorry, something went wrong. Please try later.
+      </p>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+
+    <button *ngIf="!success" (click)="cerrarModal()"
+            type="button" class="btn btn-outline-danger col-md-3">
+            <i fa [name]="'times-circle'"></i> Close
+    </button>
+
+    <button (click)="saveAlbum()" *ngIf="!error && !success"
+            type="button" class="btn btn-outline-success col-md-3">
+            <i fa [name]="'plus-circle'"></i> Add
+    </button>
+
+    <button *ngIf="success"
+            (click)="editAlbum()"
+            type="button" class="btn btn-outline-success">
+            <i fa [name]="'chevron-right'"></i> Continue
+    </button>
+
+  </div>
+</div>

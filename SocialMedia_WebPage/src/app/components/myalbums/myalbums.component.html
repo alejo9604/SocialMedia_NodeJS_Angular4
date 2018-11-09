@@ -1,0 +1,36 @@
+
+
+<div class="row">
+
+  <div class="col-md-8">
+      User Info
+  </div>
+
+  <div class="col-md-4" align="right">
+    <button class="btn btn-outline-primary" type="button" name="button" (click)="abrirModal()">
+      <i fa [name]="'plus-circle'"></i> New Album
+    </button>
+  </div>
+
+</div>
+
+<br><br><br>
+
+
+<div *ngIf="albums.length == 0 && isEnHttp"
+      class="row justify-content-md-center load">
+    <i fa [name]="'spinner'" [spin]=true [size]=3 [fw]=true
+       style="color:#0275d8"></i>
+</div>
+
+<div *ngFor="let a of albums">
+  <app-preview [album]="a"></app-preview>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+      data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <app-new-album  (refreshAlbumsEvent)="refreshAlbums($event)" ></app-new-album>
+  </div>
+</div>

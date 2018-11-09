@@ -1,0 +1,89 @@
+<div class="div-pic-container" *ngIf="album">
+
+  <div class="row">
+
+    <div class="col-md-10">
+      <h2>{{ album.name }}  <small class="fsm l-25"> Last modification: {{ album.creation_date | date }} </small></h2>
+      <h3> <small> {{ album.description }} </small> </h3>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-outline-primary" type="button" name="button" aling="rigth" (click)="editAlbum()">
+        <i fa [name]="'eye'"></i> View
+      </button>
+    </div>
+
+  </div>
+  <hr />
+
+
+  <div class="no-imgs" *ngIf="album.previewPhotos.length == 0">
+    <h5><small>This album does not have any photos!</small></h5>
+  </div>
+
+
+  <div class="row animated fadeIn fast" *ngIf="album.previewPhotos.length > 0">
+
+    <div class="col-sm-6">
+
+      <div class="row">
+        <div class="col-md-12 div-pic-1"
+            [ngStyle]="{ 'background-image': 'url( '+ ( album.previewPhotos[0] | defaultImage ) +' )'  }">
+            <div class="pic-titulo" *ngIf="album.previewPhotos[0]">
+              {{ album.previewPhotos[0].title }}
+            </div>
+            <!-- [routerLink]="['/', album.previewPhotos[0]?.id, 'home']" -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 div-pic-2"
+              [ngStyle]="{ 'background-image': 'url( '+ ( album.previewPhotos[1] | defaultImage ) +' )'  }">
+              <div class="pic-titulo" *ngIf="album.previewPhotos[1]">
+                {{ album.previewPhotos[1].title }}
+              </div>
+              <!-- [routerLink]="['/', album.previewPhotos[1]?.id, 'home']" -->
+        </div>
+        <div class="col-sm-6 div-pic-2"
+              [ngStyle]="{ 'background-image': 'url( '+ ( album.previewPhotos[2] | defaultImage ) +' )'  }">
+              <div class="pic-titulo" *ngIf="album.previewPhotos[2]">
+                {{ album.previewPhotos[2].title }}
+              </div>
+              <!-- [routerLink]="['/', album.previewPhotos[2]?.id, 'home']" -->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+
+      <div class="row">
+        <div class="col-sm-6 div-pic-2"
+              [ngStyle]="{ 'background-image': 'url( '+ ( album.previewPhotos[3] | defaultImage ) +' )'  }">
+              <div class="pic-titulo" *ngIf="album.previewPhotos[3]">
+                {{ album.previewPhotos[3].title }}
+              </div>
+              <!-- [routerLink]="['/', album.previewPhotos[2]?.id, 'home']" -->
+        </div>
+        <div class="col-sm-6 div-pic-2"
+              [ngStyle]="{ 'background-image': 'url( '+ ( album.previewPhotos[4] | defaultImage ) +' )'  }">
+              <div class="pic-titulo" *ngIf="album.previewPhotos[4]">
+                {{ album.previewPhotos[4].title }}
+              </div>
+              <!-- [routerLink]="['/', album.previewPhotos[2]?.id, 'home']" -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 div-pic-1"
+            [ngStyle]="{ 'background-image': 'url( '+ ( album.previewPhotos[5] | defaultImage ) +' )'  }">
+            <div class="pic-titulo" *ngIf="album.previewPhotos[5]">
+              {{ album.previewPhotos[5].title }}
+            </div>
+            <!-- [routerLink]="['/', album.previewPhotos[0]?.id, 'home']" -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

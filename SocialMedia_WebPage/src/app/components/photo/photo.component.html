@@ -1,0 +1,45 @@
+
+
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="pull-left">{{ album.name }}</div>
+    <button type="button" class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
+  </div>
+  <div class="modal-body">
+
+    <!--begin carousel-->
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+
+        <div  *ngFor="let photo of album.previewPhotos; let i = index"
+              [ngClass]="{'carousel-item': true, 'active': i == photoIndex}">
+          <img [src]="photo.path" [alt]="photo.title" class="mx-auto d-block">
+          <div class="carousel-caption">
+          <div class="pic-photo-titulo">
+            <h3>{{ photo.title }}</h3>
+            <p>{{ photo.description }}</p>
+          </div>
+        </div>
+
+
+  </div>
+  <!--Begin Previous and Next buttons-->
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+</div><!--end modal-body-->
+<div class="modal-footer">
+  <div class="pull-left">
+    <small>Photographs by <a href="https://lorempixel.com" target="new">Lorempixel.com</a></small>
+  </div>
+  <button class="btn-sm close" type="button" data-dismiss="modal">Close</button>
+</div><!--end modal-footer-->
+</div><!--end modal-content-->

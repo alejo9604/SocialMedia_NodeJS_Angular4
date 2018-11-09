@@ -1,0 +1,67 @@
+<div class="card drop-card animated fast fadeIn">
+  <div class="card-header">
+
+    <!-- (change)="displayPhoto($event)" -->
+      <label class="btn btn-primary btn-responsive col-sm-3" style="margin-top: 8px;">
+        <i fa [name]="'folder-open'"></i> Browse
+        <input type="file" accept="image/*" multiple  hidden NgInputFile [files] = "photoFiles">
+      </label>
+      <button type="button" class="btn btn-success btn-responsive col-sm-3" (click)="uploadsPhotos()"
+              [disabled]="photoFiles.length == 0 || !canUpload">
+        <i fa [name]="'circle-o-notch'" [spin]=true [fw]=true *ngIf="uploading"></i>
+        <i fa [name]="'upload'" *ngIf="!uploading"></i> Uploads
+      </button>
+      <button type="button" class="btn btn-danger btn-responsive col-sm-3" (click)="cleanPhotos()">
+        <i fa [name]="'times-circle'"></i> Cancel
+      </button>
+    <!-- </div> -->
+  </div>
+  <div class="card-block"
+       NgDropFiles
+       [ngClass]="{ 'file-over': isInDropZone, 'file-uploading': uploading }"
+       (fileIn)="fileInDropZone($event)"
+       [files] = "photoFiles"
+       class="well drop-zone">
+       <h4 *ngIf="photoFiles.length == 0">Drag your photos here!</h4>
+
+
+       <div *ngFor="let file of photoFiles; let i = index;" class="row drop-preview">
+
+         <div class="col-md-2">
+           <img  [src]="file.file | filePreview" *ngIf="isImage(file.file)" [width]="previewWidth" />
+         </div>
+
+         <div class="col-md-10">
+
+           <form class="form-inline">
+
+             <label class="sr-only" for="inlineFormInput">Title</label>
+             <input [(ngModel)]="file.title"
+                    name="title"
+                    type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 col-md-3"
+                    placeholder="Title">
+
+            <label class="sr-only" for="inlineFormInput">Description</label>
+            <input [(ngModel)]="file.description"
+                   name="description"
+                   type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 col-md-7"
+                   placeholder="Description">
+
+             <div class="form-group">
+               <button type="button" (click)="removePhoto(i)" class="btn btn-sm btn-danger">
+                <i fa [name]="'close'"></i>
+               </button>
+             </div>
+
+           </form>
+         </div>
+
+
+
+         <!-- <h4> <small>{{file.name}}</small> </h4>
+         <h4 >{{ file.size / 1024 / 1024 | number:'.2'}}MB</h4> -->
+       </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<header  class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+  <nav class="container">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">PhotoApp</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"  routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['home']">Home</a>
+        </li>
+        <li class="nav-item"   routerLinkActive="active" *ngIf="_singServ.isAuthenticated()">
+          <a class="nav-link" [routerLink]="['albums']">My albums</a>
+        </li>
+        <li class="nav-item"   routerLinkActive="active" *ngIf="_singServ.isAuthenticated()">
+          <a class="nav-link" [routerLink]="['editUser']">Edit profile</a>
+        </li>
+
+        <li class="nav-item"   routerLinkActive="active" *ngIf="_singServ.isAdmin">
+          <a class="nav-link" [routerLink]="['admin']">Admin</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right" *ngIf="!_singServ.isAuthenticated()">
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+          <ul id="login-dp" class="dropdown-menu">
+            <li>
+  					 <div class="row">
+  							<div class="col-md-12">
+  								 <form  #form="ngForm">
+
+                     <div class="form-group"
+                           [ngClass]="{' has-danger': (username.errors?.required  && username.touched)}">
+                       <div class="input-group mb-2 mr-sm-2">
+                         <div class="input-group-addon">
+                           <i fa [name]="'user'"></i>
+                         </div>
+                         <input type="text" autocomplete="off"
+                               name="username"
+                               [(ngModel)]="user.username"
+                               required
+                               #username="ngModel"
+                              class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="Username">
+                       </div>
+                       <div class="form-control-feedback feedback-font" *ngIf="username.errors?.required && username.touched">
+                         Username is required
+                       </div>
+                    </div>
+
+                    <div class="form-group"
+                          [ngClass]="{' has-danger': (password.errors?.required  && password.touched)}">
+
+
+                       <div class="input-group mb-2 mr-sm-2">
+                         <div class="input-group-addon">
+                           <i fa [name]="'key'"></i>
+                         </div>
+                         <input type="password"
+                                name="password"
+                                [(ngModel)]="user.password"
+                                required
+                                #password="ngModel"
+                                class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="Password">
+                       </div>
+                       <div class="form-control-feedback feedback-font" *ngIf="password.errors?.required && password.touched">
+                         Password is required
+                       </div>
+                    </div>
+                     <!-- <div class="help-block text-right"><a href="">Forget the password ?</a></div> -->
+
+                     <div class="checkbox">
+                        <label algin="right">
+                        <input type="checkbox"> keep me logged-in
+                        </label>
+                     </div>
+
+
+                     <div class="alert alert-danger text-center error-font" role="alert" *ngIf="error">
+                      <strong>User or passwrod incorrect</strong>
+                    </div>
+
+  										<div align="right">
+                        <button (click)="openSignUp()"
+                                class="btn btn-outline-success btn-sm col-sm-5"
+                                type="button">
+                          Sign up
+                        </button>
+                        <button (click)="login()"
+                                 [disabled]="!form.valid"
+                                class="btn btn-outline-primary btn-sm col-sm-5"
+                                type="button">
+                          Sign in
+                        </button>
+  										</div>
+  								 </form>
+  							</div>
+  					 </div>
+  				</li>
+          </ul>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0" *ngIf="_singServ.isAuthenticated()">
+        <button (click)="logout()"
+                class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">
+                Logout
+        </button>
+      </form>
+      <!-- <form class="form-inline my-2 my-lg-0" >
+        <button (click)="_singServ.logout()"
+                class="btn btn-outline-primary btn-sm col-sm-5"
+                type="button">
+          Log out
+        </button>
+      </form> -->
+
+
+      <!-- <form class="form-inline my-2 my-lg-0">
+          <button (click)="openSignUp()"
+                  *ngIf="!auth.isAuthenticated()"
+                  class="btn btn-outline-success  btn-sm"
+                  type="button">
+            Sing up
+          </button>
+          <button (click)="logout()"
+                  *ngIf="auth.isAuthenticated()"
+                  class="btn btn-outline-success  btn-sm"
+                  type="button">
+            Logout
+          </button>
+      </form> -->
+    </div>
+  </nav>
+</header>
+
+
+<!-- Modal -->
+<div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <app-sing-up></app-sing-up>
+  </div>
+</div>

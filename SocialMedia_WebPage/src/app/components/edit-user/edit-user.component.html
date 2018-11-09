@@ -1,0 +1,229 @@
+<div class="edit-body">
+
+  <form class="form-horizontal form-singup" [formGroup]="form" *ngIf="!success">
+    <fieldset>
+
+      <div class="form-group row"
+          [ngClass]="{' has-danger': (!form.get('name').valid && form.get('name').touched)}">
+        <label class="col-md-3 control-label">Name</label>
+        <div class="col-md-9 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i fa [name]="'user-o'"></i>
+            </span>
+            <input  name="name" formControlName="name" [(ngModel)]="user.name"
+                    placeholder="Name" class="form-control"  type="text">
+          </div>
+          <div *ngIf="form.get('name').errors?.required && form.get('name').touched"
+                class="form-control-feedback">
+            Name is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Text input-->
+
+      <div class="form-group row"
+          [ngClass]="{' has-danger': (!form.get('username').valid && form.get('username').touched)}">
+        <label class="col-md-3 control-label">Username</label>
+        <div class="col-md-9 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i fa [name]="'user'"></i>
+            </span>
+            <input  name="username" formControlName="username" [(ngModel)]="user.username"
+                    placeholder="Username" class="form-control"  type="text">
+          </div>
+          <div *ngIf="form.get('username').errors?.required && form.get('username').touched"
+                class="form-control-feedback">
+            Username is required
+          </div>
+          <div *ngIf="form.get('username').errors?.minlength && form.get('username').touched"
+               class="form-control-feedback">
+            At least {{ form.get('username').errors?.minlength.requiredLength }} characters
+          </div>
+        </div>
+      </div>
+
+      <!-- Text input-->
+
+      <div class="form-group row"
+            [ngClass]="{' has-danger': (!form.get('password').valid && form.get('password').touched)}">
+        <label class="col-md-3 control-label">Password</label>
+        <div class="col-md-9 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i fa [name]="'key'"></i>
+            </span>
+            <input name="password" formControlName="password" [(ngModel)]="user.password"
+                   placeholder="Password" class="form-control"  type="password">
+          </div>
+          <div *ngIf="form.get('password').errors?.required && form.get('password').touched"
+                class="form-control-feedback">
+            Password is required
+          </div>
+          <div *ngIf="form.get('password').errors?.pattern && form.get('password').touched"
+                class="form-control-feedback">
+            Must contain at least 8 chars, one digit, one lower alpha char and one upper alpha char
+          </div>
+        </div>
+      </div>
+
+      <!-- Text input-->
+
+      <div class="form-group row"
+           [ngClass]="{' has-danger': (!form.get('password2').valid && form.get('password2').touched)}">
+        <label class="col-md-3 control-label">Confirm Password</label>
+        <div class="col-md-9 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i fa [name]="'key'"></i>
+            </span>
+            <input name="password2" formControlName="password2"
+                   placeholder="Confirm Password" class="form-control"  type="password">
+          </div>
+          <div *ngIf="form.get('password2').errors?.nosame && form.get('password2').touched"
+                class="form-control-feedback">
+            Passwords do not match
+          </div>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group row"
+           [ngClass]="{' has-danger': (!form.get('email').valid && form.get('email').touched)}">
+        <label class="col-md-3 control-label">Email</label>
+        <div class="col-md-9 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i fa [name]="'envelope'"></i>
+            </span>
+            <input name="email" formControlName="email" [(ngModel)]="user.email"
+                   placeholder="E-Mail Address" class="form-control"  type="text">
+          </div>
+          <div *ngIf="form.get('email').errors?.required && form.get('email').touched"
+                class="form-control-feedback">
+            Email is required
+          </div>
+          <div *ngIf="form.get('email').errors?.pattern && form.get('email').touched"
+                class="form-control-feedback">
+            Enter a valid email
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 control-label">Profile photo</label>
+        <div class="col-md-2">
+          <img *ngIf="fileAvatar.length > 0" [src]="fileAvatar[0].file | filePreview"
+               class="img-fluid pull-xs-left rounded-circle form-singup-avatar" alt="...">
+          <img *ngIf="fileAvatar.length == 0" [src]="this.user.avatar"
+                class="img-fluid pull-xs-left rounded-circle form-singup-avatar" alt="...">
+        </div>
+        <div class="col-md-7">
+          <label class="btn btn-sm btn-primary btn-responsive col-md-8" style="margin-top: 8px;">
+            <i fa [name]="'folder-open'"></i> Browse
+            <input type="file" accept="image/*" hidden NgInputFile [isMultiple]=false [files]="fileAvatar" >
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="alert alert-success" role="alert" *ngIf="success">
+    Successful created new user {{form.value.username}}
+  </div>
+
+  <div class="alert alert-danger" role="alert" *ngIf="error">
+    {{ msg }}
+  </div>
+
+
+  <div class="row justify-content-end">
+    <div class="col-md-8" align="right">
+      <button type="button" class="btn btn-warning" (click)="openChangePassModal()">
+        <!-- <i fa [name]="'circle-o-notch'" [spin]=true [fw]=true *ngIf="uploading"></i> -->
+        <i fa [name]="'save'" ></i> Change password
+      </button>
+      <button type="button" class="btn btn-success" (click)="uploadsPhotos()">
+        <!-- <i fa [name]="'circle-o-notch'" [spin]=true [fw]=true *ngIf="uploading"></i> -->
+        <i fa [name]="'save'" ></i> Save
+      </button>
+      <button type="button" class="btn btn-danger" (click)="cleanPhotos()">
+        <i fa [name]="'times-circle'"></i> Cancel
+      </button>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade " id="ChangePassModal" tabindex="-1" role="dialog" aria-labelledby="ChangePassModal" aria-hidden="true"
+      data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ChangePassModalTitle">Change Password</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeChangePassModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+           <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Password</label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control"
+                       [(ngModel)]="password" name="password">
+              </div>
+            </div>
+
+            <div class="form-group row">
+             <label class="col-sm-4 col-form-label">New Password</label>
+             <div class="col-sm-8">
+               <input type="password" class="form-control"
+                       [(ngModel)]="new_password" name="new_password">
+             </div>
+           </div>
+
+           <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Confirm Password</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control"
+                      [(ngModel)]="new_password2" name="new_password2">
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="alert alert-danger" role="alert" *ngIf="errorPassData">
+            <p>Passwords are required</p>
+            <p>Must contain at least 8 chars, one digit, one lower alpha char and one upper alpha char</p>
+          </div>
+          <div class="alert alert-success" role="alert" *ngIf="successPass">
+            <p>
+              Password changed
+            </p>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="errorPass">
+            <p>
+              Sorry, something went wrong. Please try later.
+            </p>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeChangePassModal()">
+          <i fa [name]="'times-circle'"></i> Cancel
+        </button>
+        <button type="button" class="btn btn-success" (click)="changePassword()">
+          <i fa [name]="'save'" ></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

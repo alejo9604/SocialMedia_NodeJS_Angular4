@@ -1,0 +1,46 @@
+
+<div class="alert alert-success" role="alert" *ngIf="success">
+  <p>
+    Success
+  </p>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="error">
+  <p>
+    Sorry, something went wrong. Please try later.
+  </p>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Type</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let user of users; let i = index">
+      <th scope="row">{{i}}</th>
+      <td>{{user.name}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>
+        <select class="custom-select" [(ngModel)]="user.type">
+          <option value="1">Regular</option>
+          <option value="2">Pro</option>
+          <option value="3">Admin</option>
+        </select>
+      </td>
+      <td>
+        <button type="button" name="button" class="btn btn-sm btn-outline-primary btn-edit-min" (click)="changeType(i)">
+          <i fa [name]="'save'"></i>
+        </button>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
