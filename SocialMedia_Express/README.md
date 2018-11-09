@@ -16,7 +16,7 @@ This project was made with Typescript, [Grunt](https://gruntjs.com/), [Express](
 
 `localhost:3000`
 
-> Database connection: edit **[.env](./.env)**
+> Database connection: edit **[.env](./.env)** <br>
 > SQL file: **[here](./photoapp.sql)**
 
 ## Reference
